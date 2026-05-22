@@ -15,8 +15,14 @@ router.post(
   issuesController.createIssue,
 );
 
-router.patch("/:id", auth(USER_ROLE.maintainer), issuesController.updateIssue);
+// patch
+router.patch(
+  "/:id",
+  auth(USER_ROLE.contributor, USER_ROLE.maintainer),
+  issuesController.updateIssue,
+);
 
+// delete
 router.delete("/:id", auth(USER_ROLE.maintainer), issuesController.deleteIssue);
 
 export const issuesRouter = router;

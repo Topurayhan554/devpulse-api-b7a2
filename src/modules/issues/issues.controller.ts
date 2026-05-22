@@ -229,6 +229,15 @@ const deleteIssue = async (req: Request, res: Response): Promise<void> => {
   try {
     const id = Number(req.params.id);
 
+    if (req.user!.role !== "maintainer") {
+      sendResponse(res, {
+        statusCode: StatusCodes.FORBIDDEN,
+        success: false,
+        message: "Forbidden! Only maintainers can delete issues.",
+      });
+      return;
+    }
+
     const existing = await issuesService.getRawIssueById(id);
     if (!existing) {
       sendResponse(res, {

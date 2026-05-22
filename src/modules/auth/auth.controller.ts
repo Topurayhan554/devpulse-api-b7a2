@@ -31,7 +31,7 @@ const signup = async (req: Request, res: Response): Promise<void> => {
       name,
       email,
       password,
-      role,
+      ...(role !== undefined && { role }),
     });
 
     sendResponse(res, {

@@ -71,10 +71,13 @@ const createIssue = async (req: Request, res: Response): Promise<void> => {
 
 const getAllIssues = async (req: Request, res: Response): Promise<void> => {
   try {
+    const type = req.query.type as IssueType | undefined;
+    const status = req.query.status as IssueStatus | undefined;
+
     const query: IIssueQuery = {
       sort: (req.query.sort as IIssueQuery["sort"]) ?? "newest",
-      type: req.query.type as IssueType | undefined,
-      status: req.query.status as IssueStatus | undefined,
+      ...(type !== undefined && { type }),
+      ...(status !== undefined && { status }),
     };
 
     const issues = await issuesService.getAllIssuesFromDB(query);
@@ -142,7 +145,6 @@ const updateIssue = async (req: Request, res: Response): Promise<void> => {
     }
 
     if (currentUser.role === "contributor") {
-      // Contributor can only edit their own issue
       if (existing.reporter_id !== currentUser.id) {
         sendResponse(res, {
           statusCode: StatusCodes.FORBIDDEN,

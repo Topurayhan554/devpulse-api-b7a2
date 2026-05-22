@@ -34,10 +34,14 @@ const registerUserIntoDB = async (
     [name, email, hashedPassword, role],
   );
 
-  return result.rows[0];
+  const user = result.rows[0];
+  if (!user) {
+    throw new Error("USER_CREATION_FAILED");
+  }
+
+  return user;
 };
 
-// login
 const loginUser = async (
   body: ILoginBody,
 ): Promise<{ token: string; user: IUserPublic }> => {

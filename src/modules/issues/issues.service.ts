@@ -46,7 +46,9 @@ const createIssueIntoDB = async (
     [title, description, type, reporterId],
   );
 
-  return result.rows[0];
+  const issue = result.rows[0];
+  if (!issue) throw new Error("ISSUE_CREATION_FAILED");
+  return issue;
 };
 
 const getAllIssuesFromDB = async (
@@ -105,7 +107,7 @@ const getIssueByIdFromDB = async (
 
   if (result.rows.length === 0) return null;
 
-  const { reporter_id, ...issue } = result.rows[0];
+  const { reporter_id, ...issue } = result.rows[0]!;
   const reporter = await getUserById(reporter_id);
 
   return {
@@ -147,7 +149,9 @@ const updateIssueInDB = async (
     [title ?? null, description ?? null, type ?? null, status ?? null, id],
   );
 
-  return result.rows[0];
+  const updated = result.rows[0];
+  if (!updated) throw new Error("ISSUE_NOT_FOUND");
+  return updated;
 };
 
 const deleteIssueFromDB = async (id: number): Promise<void> => {

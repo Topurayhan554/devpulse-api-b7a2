@@ -2,6 +2,7 @@ import jwt, { type JwtPayload } from "jsonwebtoken";
 import type { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import config from "../config";
+import type { ITokenPayload } from "../modules/auth/auth.inteface";
 import type { UserRole } from "../types";
 
 const auth = (...roles: UserRole[]) => {
@@ -39,11 +40,12 @@ const auth = (...roles: UserRole[]) => {
         return;
       }
 
-      req.user = decoded as JwtPayload & {
-        id: number;
-        name: string;
-        role: string;
-      };
+      req.user = {
+        id: decoded.id as number,
+        name: decoded.name as string,
+        role: decoded.role as UserRole,
+      } satisfies ITokenPayload;
+
       next();
     } catch (error) {
       next(error);

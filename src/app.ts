@@ -6,7 +6,7 @@ import express, {
 } from "express";
 import cors from "cors";
 import { StatusCodes } from "http-status-codes";
-import { issuesRouter } from "./modules/users/issues.route";
+import { issuesRouter } from "./modules/issues/issues.route";
 import { authRouter } from "./modules/auth/auth.route";
 
 const app: Application = express();

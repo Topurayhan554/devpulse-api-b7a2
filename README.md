@@ -2,7 +2,7 @@
 
 A collaborative backend platform for software teams to report bugs, suggest features, and coordinate resolutions — built with Node.js, TypeScript, Express.js, and PostgreSQL.
 
-🔗 **Live URL:** [https://devpulse-api.vercel.app](https://devpulse-api-b7a2.vercel.app/)
+🔗 **Live URL:** [https://devpulse-api.vercel.app](https://devpulse-api-b7a2.vercel.app/) <br>
 📦 **GitHub Repo:** [https://github.com/yourusername/devpulse](https://github.com/Topurayhan554/devpulse-api-b7a2.git)
 
 ---
@@ -155,8 +155,8 @@ CREATE TABLE issues (
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/devpulse.git
-cd devpulse
+git clone https://github.com/Topurayhan554/devpulse-api-b7a2.git
+cd devpulse-api-b7a2
 ```
 
 ### 2. Install dependencies
